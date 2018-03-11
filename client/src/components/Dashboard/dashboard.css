@@ -49,3 +49,9 @@
     box-shadow: 0 10px 6px -6px #777;
     
 }
+
+.anchor {
+    font-family: 'Abel', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}

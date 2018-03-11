@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import "./dashboard.css";
@@ -45,7 +46,7 @@ class Dashboard extends Component {
 
 	renderSelect() {
 		return (
-			<select className="select" onChange = {this.onChange}>
+			<select autoFocus className="select" onChange = {this.onChange}>
 				<option>all</option>
 				{this.state.categories.map(option => (
 					<option key={option} value={option}>
@@ -75,6 +76,7 @@ class Dashboard extends Component {
 		return (
 			<div className="commands-container">
 				{this.renderSelect()}
+				<div className="anchor"><Link to={"/cmd"}>create new command</Link></div>
 				{this.renderCommands()}
 			</div>
 		);

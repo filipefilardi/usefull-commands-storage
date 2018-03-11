@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter, Link } from 'react-router-dom';
 import axios from "axios";
 
 import "./command.css";
@@ -18,10 +19,10 @@ class Command extends Component {
 	}
 
 	handleChange(event) {
-		switch(event.target.placeholder){
+		switch(event.target.name){
 			case "category":
 				this.setState({
-					category: event.target.value
+					category: event.target.value.toLowerCase()
 				});
 				break;
 			case "command" :
@@ -34,6 +35,8 @@ class Command extends Component {
 					summary: event.target.value
 				});
 				break;
+			default:
+				console.log("error")
 		}
 
 	}
@@ -45,8 +48,8 @@ class Command extends Component {
 			summary: this.state.summary
 		})
 		.then(function (response) {
-			console.log(response);
-		})
+			this.props.history.push("/")
+		}.bind(this))
 		.catch(function (error) {
 			console.log(error);
 		});
@@ -56,15 +59,18 @@ class Command extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>	
-				<input type="text" value={this.state.value} placeholder="category" onChange={this.handleChange} />
-				<input type="text" value={this.state.value} placeholder="command" onChange={this.handleChange} />
-				<input type="text" value={this.state.value} placeholder="summary" onChange={this.handleChange} />
-				<input type="submit" value="Submit" />
-			</form>
+			<div>
+				<div className="anchor-command"><Link to={"/"}>back</Link></div>
+				<form onSubmit={this.handleSubmit}>	
+					<input type="text" value={this.state.value} name="category" onChange={this.handleChange} />
+					<input type="text" value={this.state.value} name="command" onChange={this.handleChange} />
+					<input type="text" value={this.state.value} name="summary" onChange={this.handleChange} />
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
 
 		);
 	}
 }
 
-export default Command;
+export default withRouter(Command);
