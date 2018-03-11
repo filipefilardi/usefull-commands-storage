@@ -34,4 +34,10 @@ module.exports = app => {
 
 		res.send(commands);
 	});
+
+	app.get("/api/commands/:category", async (req, res) => {
+		const commands = await Commands.find({ category: req.params.category});
+
+		res.send(commands);
+	});
 };

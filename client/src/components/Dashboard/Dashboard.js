@@ -1,43 +1,80 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import './dashboard.css'
+import "./dashboard.css";
 
 class Dashboard extends Component {
-	constructor(){
+	constructor() {
 		super();
 
 		this.state = {
-			commands: []
+			commands: [],
+			filter: "all",
+			categories: []
 		};
+
+		this.onChange = this.onChange.bind(this);
 	}
 
 	componentDidMount() {
-		axios.get('/api/all_commands')
-		.then(res => {
-			this.setState({
-				commands: res.data
+		axios
+			.get("/api/all_commands")
+			.then(res => {
+				let categories = [];
+
+				for (var i = 0; i < res.data.length; i++) {
+					if (categories.indexOf(res.data[i].category) < 0)
+						categories.push(res.data[i].category);
+				}
+
+				this.setState({
+					commands: res.data,
+					categories: categories.sort()
+				});
+			})
+			.catch(function(error) {
+				console.log(error);
 			});
-		})
-		.catch(function (error) {
-			console.log(error);
+	}
+
+	onChange(event) {
+		this.setState({
+			filter: event.target.value
 		});
 	}
 
-	renderCommands(){
+	renderSelect() {
 		return (
-			this.state.commands.map(row => (
-				<div className="commands-item" key={row.command}>
-					<div className="command">{row.command}</div>
-					<div className="summary">{row.summary}</div>
-				</div>
-			))
-		)
+			<select className="select" onChange = {this.onChange}>
+				<option>all</option>
+				{this.state.categories.map(option => (
+					<option key={option} value={option}>
+						{option}
+					</option>
+				))}
+			</select>
+		);
+	}
+
+	renderCommands() {
+		return this.state.commands.map(
+			row =>
+				this.state.filter === row.category ||
+				this.state.filter === "all" ? (
+					<div className="commands-item" key={row.command}>
+						<div className="command">{row.command}</div>
+						<div className="summary">{row.summary}</div>
+					</div>
+				) : (
+					""
+				)
+		);
 	}
 
 	render() {
 		return (
 			<div className="commands-container">
+				{this.renderSelect()}
 				{this.renderCommands()}
 			</div>
 		);
