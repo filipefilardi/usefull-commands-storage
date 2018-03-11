@@ -10,7 +10,7 @@ require("./src/components/command/commandModel");
 mongoose.connect(config.mongoURI);
 
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(
@@ -25,4 +25,4 @@ app.use(passport.session());
 require("./src/components/user/userAPI")(app);
 require("./src/components/command/commandAPI")(app);
 
-app.listen(port);
+app.listen(PORT);
