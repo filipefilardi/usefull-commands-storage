@@ -22,7 +22,7 @@ class Command extends Component {
 		switch(event.target.name){
 			case "category":
 				this.setState({
-					category: event.target.value.toLowerCase()
+					category: event.target.value
 				});
 				break;
 			case "command" :
@@ -62,9 +62,9 @@ class Command extends Component {
 			<div>
 				<div className="anchor-command"><Link to={"/"}>back</Link></div>
 				<form onSubmit={this.handleSubmit}>	
-					<input type="text" value={this.state.value} name="category" onChange={this.handleChange} />
-					<input type="text" value={this.state.value} name="command" onChange={this.handleChange} />
-					<input type="text" value={this.state.value} name="summary" onChange={this.handleChange} />
+					<input type="text" value={this.state.value} name="category" placeholder="category or programming language" onChange={this.handleChange} />
+					<input type="text" value={this.state.value} name="command" placeholder="command you want to save" onChange={this.handleChange} />
+					<input type="text" value={this.state.value} name="summary" placeholder="what the command does" onChange={this.handleChange} />
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
