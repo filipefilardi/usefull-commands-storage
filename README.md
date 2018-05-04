@@ -1,6 +1,6 @@
 # usefull-commands-storage
 
-![usefull-commands-gif](url?raw=true)
+![usefull-commands-gif](https://user-images.githubusercontent.com/7308241/39632750-536717e0-4f8c-11e8-91e5-a6e827744e21.gif)
 
 ## Getting Started
 
