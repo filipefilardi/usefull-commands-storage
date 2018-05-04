@@ -1,5 +1,7 @@
 # usefull-commands-storage
 
+![usefull-commands-gif](url?raw=true)
+
 ## Getting Started
 
 ### Prerequisites
